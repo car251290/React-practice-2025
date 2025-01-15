@@ -1,0 +1,38 @@
+
+.card {
+    transition: transform 0.2s;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .card-img-top {
+    border-bottom: 1px solid #ddd;
+    height: 300px;
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card-body {
+    background: linear-gradient(45deg, #ed1d24, #ffcc00); /* Marvel red and yellow gradient */
+    display: flex;
+    flex-direction: column;
+  }
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .btn-primary {
+    background-color: #7E0100;
+    border-color: #7E0100;
+  }
+  
+  .btn-primary:hover {
+    background-color: #7E0100;
+    border-color: #7E0100;
+  }
+  

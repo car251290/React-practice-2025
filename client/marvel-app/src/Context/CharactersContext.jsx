@@ -11,7 +11,7 @@ export const CharactersProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.get('http://localhost:3001/api/characters');
+      const res = await axios.get('https://gateway.marvel.com/v1/public/characters');
       setCharacters(res.data.data.results);
     } catch (err) {
       console.error('Failed to fetch characters:', err.message);

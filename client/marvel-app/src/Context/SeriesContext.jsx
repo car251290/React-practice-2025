@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext,useCallback } from 'react';
 import axios from 'axios';
 
 const SeriesContext = React.createContext();
@@ -8,7 +8,7 @@ export const SeriesProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchSeries = async () => {
+  const fetchSeries = useCallback( async () => {
     setLoading(true);
     setError(null);
     try {
@@ -20,7 +20,7 @@ export const SeriesProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  };
+  },[setLoading, setSeries, setError]);
 
   useEffect(() => {
     fetchSeries();

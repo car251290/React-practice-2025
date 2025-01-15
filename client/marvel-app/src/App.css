@@ -2,7 +2,6 @@ body {
   margin:0;
   font-size: large;
   font-family: 'Roboto', sans-serif;
- 
   color: #f5f5f5; 
   background: linear-gradient(45deg, #f37704, #ffcc00); /* Marvel red and yellow gradient */
 }
@@ -17,82 +16,7 @@ h1 {
 
 .navbar {
   margin-bottom: 30px;
-  background: linear-gradient(45deg, #ed851d, #ffcc00); /* Marvel red and yellow gradient */
-}
-
-.home-page {
-  text-align: center;
-}
-
-.home-page img {
-  width: 200px;
-  margin: 10px;
-  border-radius: 8px;
-}
-
-.comics-container,.series-container,.characters-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin: 20px;
-}
-.comic-container div, .series-container div .characters-container div {
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 200px;
-  text-align: center;
-}
-
-.character-card {
-  background: linear-gradient(45deg, #ed1d24, #ffcc00); /* Marvel red and yellow gradient */
-  color: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 20px auto;
-  width: 90%;
-  max-width: 300px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-.character-card img {
-  border-radius: 8px;
-  width: 100%;
-}
-
-.comic-card {
-  background: linear-gradient(45deg, #ed1d24, #ffcc00); /* Marvel red and yellow gradient */
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  width: 200px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.comic-card h3  {
-  font-size: 1.2rem;
-  color: #ff0000;
-}
-
-.comic-card img {
-  margin: 10px 0;
-  border-radius: 8px;
+  background: linear-gradient(45deg, #C62911, #FF9F33); /* Marvel red and yellow gradient */
 }
 
 
-.series-card h3  {
-  font-size: 1.2rem;
-  color: #ff0000;
-}
-.serie-card{
-  background: linear-gradient(45deg, #ed1d24, #ffcc00); /* Marvel red and yellow gradient */
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  width: 200px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
