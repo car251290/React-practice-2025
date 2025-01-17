@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
-const { generateAuthParams } = require('../utils/auth'); // Ensure this path is correct
+const { generateAuthParams } = require('../utils/auth');
 
 router.get('/', async (req, res) => {
   const { ts, apikey, hash } = generateAuthParams();

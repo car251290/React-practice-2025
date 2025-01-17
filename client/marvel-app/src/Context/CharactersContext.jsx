@@ -1,17 +1,18 @@
-import React, { useContext, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useEffect, useCallback, useState } from 'react';
 import axios from 'axios';
-import { useMarvel } from './MarvelContext';
 
-const CharactersContext = React.createContext();
+const CharactersContext = createContext();
 
 export const CharactersProvider = ({ children }) => {
-  const { characters, setCharacters, loading, setLoading, error, setError } = useMarvel();
+  const [characters, setCharacters] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const fetchCharacters = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.get('https://gateway.marvel.com/v1/public/characters');
+      const res = await axios.get('http://localhost:3001/api/characters');
       setCharacters(res.data.data.results);
     } catch (err) {
       console.error('Failed to fetch characters:', err.message);
@@ -19,7 +20,7 @@ export const CharactersProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  }, [setCharacters, setLoading, setError]);
+  }, []);
 
   useEffect(() => {
     fetchCharacters();

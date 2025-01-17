@@ -1,12 +1,33 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Marvel12 from '../../img/Marvel12.jpg';
 import Marvel10 from '../../img/Marvel10.webp';
 import Marvel11 from '../../img/Marvel11.jpeg';
 import './homeMenu.css';
-
+import '../Search/search'
 const HomeMenu = () => {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await axios.get(`http://localhost:3001/api/search`, {
+        params: { query },
+      });
+      setResults(res.data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -43,12 +64,14 @@ const HomeMenu = () => {
                 </Link>
               </li>
             </ul>
-            <form className="d-flex">
+            <form className="d-flex" onSubmit={handleSearch}>
               <input
                 className="form-control me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
               />
               <button className="btn btn-outline-success" type="submit">
                 Search
@@ -57,6 +80,16 @@ const HomeMenu = () => {
           </div>
         </div>
       </nav>
+      {loading && <p>Loading...</p>}
+      {error && <p style={{color:'red'}}>{error}</p>}
+      <div>
+        {results.map((result)=> (
+          <div key={result.id}>
+            <h3>{result.title || result.name}</h3>
+            <p>{result.description}</p>
+          </div>
+        ))}
+      </div>
       <div className="image-container">
         <div className="card home-card">
           <img src={Marvel12} alt="Marvel12" className="card-img-top home-image" />

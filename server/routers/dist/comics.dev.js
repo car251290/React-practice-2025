@@ -7,8 +7,7 @@ var axios = require('axios');
 var router = express.Router();
 
 var _require = require('../utils/auth'),
-    generateAuthParams = _require.generateAuthParams; // Ensure this path is correct
-
+    generateAuthParams = _require.generateAuthParams;
 
 router.get('/', function _callee(req, res) {
   var _generateAuthParams, ts, apikey, hash, MARVEL_API_URL, response;

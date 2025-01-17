@@ -7,9 +7,9 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3001;
 
-const comicsRouter = require('./routes/comics');
-const seriesRouter = require('./routes/series');
-const charactersRouter = require('./routes/characters'); // Ensure this path is correct
+const comicsRouter = require('./routers/comics'); // Ensure this path is correct
+const seriesRouter = require('./routers/series'); // Ensure this path is correct
+const charactersRouter = require('./routers/characters'); // Ensure this path is correct
 
 app.use(cors()); // Enable CORS
 
@@ -31,10 +31,41 @@ const generateAuthParams = () => {
   return { ts, apikey: MARVEL_PUBLIC_KEY, hash };
 };
 
+// Search endpoint
+app.get('/api/search', async (req, res) => {
+  const { query } = req.query;
+  const { ts, apikey, hash } = generateAuthParams();
+  const MARVEL_API_URL = 'https://gateway.marvel.com/v1/public';
+
+  try {
+    const [comicsResponse, seriesResponse, charactersResponse] = await Promise.all([
+      axios.get(`${MARVEL_API_URL}/comics`, { params: { ts, apikey, hash, titleStartsWith: query } }),
+      axios.get(`${MARVEL_API_URL}/series`, { params: { ts, apikey, hash, titleStartsWith: query } }),
+      axios.get(`${MARVEL_API_URL}/characters`, { params: { ts, apikey, hash, nameStartsWith: query } }),
+    ]);
+
+    const results = [
+      ...comicsResponse.data.data.results,
+      ...seriesResponse.data.data.results,
+      ...charactersResponse.data.data.results,
+    ];
+
+    res.json(results);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+// Search endpoint
+app.get('/api/search', async(req,res)=> {
+const {query} = req.query;
+const {ts,apikey,hash} = generateAuthParams();
+const MARVEL_API_URL = 'https://gateway.marvel.com/v1/public';
+});
+
 // Use the routers
 app.use('/api/comics', comicsRouter);
 app.use('/api/series', seriesRouter);
-app.use('/api/characters', charactersRouter); // Use the characters router
+app.use('/api/characters', charactersRouter);
 
 // Start server
 app.listen(port, () => {
